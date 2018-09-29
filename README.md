@@ -1,5 +1,5 @@
 # About
-Simple API for tradesman jobs API.
+Simple tradesman jobs management API.
 
 # Documentation
 Please see documentation online [https://app.swaggerhub.com/apis/viktor-br/tradesman-jobs-api/1.0#/](https://app.swaggerhub.com/apis/viktor-br/tradesman-jobs-api/1.0#/)
@@ -88,13 +88,7 @@ To get access to API endpoint in browser [http://www-docker.tradesman-api:8008/v
 ```
 
 ## Testing
-Testing environment is separated and could be running simultaneously with dev environment.
-Run application in test mode (press Ctrl+C to stop running containers at the end):
-```bash
-docker-compose -f docker-compose-testing.yml -p testing up
-```
-
-Run unit tests:
+### Unit tests
 ```bash
 docker run \
     --rm \
@@ -102,6 +96,13 @@ docker run \
     -w /usr/src/tradesman-api \
     viktor-brusylovets/php-with-composer:v1.0 \
     bash -c 'vendor/bin/codecept run unit'
+```
+
+### Acceptance tests
+Testing environment is separated and could be running simultaneously with dev environment.
+Run application in test mode (press Ctrl+C to stop running containers at the end):
+```bash
+docker-compose -f docker-compose-testing.yml -p testing up
 ```
 
 Run acceptance tests:
