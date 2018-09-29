@@ -1,0 +1,16 @@
+fos_rest:
+  view:
+    view_response_listener:  true
+  format_listener:
+    rules:
+    - { path: ^/v1, prefer_extension: true, fallback_format: json, priorities: [ json ] }
+  body_converter:
+    enabled: true
+  exception:
+    enabled: true
+    exception_controller: 'fos_rest.exception.controller:showAction'
+    codes:
+      Doctrine\ORM\EntityNotFoundException: 404
+      App\Exception\ValidationException: 404
+      InvalidArgumentException: 400
+      Doctrine\ORM\ORMException: 500

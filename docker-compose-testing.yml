@@ -1,0 +1,44 @@
+version: '2'
+services:
+  nginx:
+    image: nginx:latest
+    container_name: tradesman-api-testing-nginx
+    ports:
+    - "8888:8008"
+    volumes:
+    - ./infrastructure/nginx/conf:/etc/nginx/conf.d
+    - ./infrastructure/nginx/logs:/var/log/nginx/
+    - ./:/usr/src/tradesman-api/
+    links:
+    - php
+    networks:
+    - tradesmannet_testing
+  php:
+    image: viktor-brusylovets/tradesman-api:v1.0
+    container_name: tradesman-api-testing-app
+    environment:
+    - DATABASE_URL=mysql://docker:12345@tradesman-api-testing-mysql:3306/tradesman_testing
+    volumes:
+    - ./:/usr/src/tradesman-api/
+    links:
+    - mysql
+    networks:
+    - tradesmannet_testing
+  mysql:
+    image: percona:latest
+    container_name: tradesman-api-testing-mysql
+    environment:
+    - MYSQL_ALLOW_EMPTY_PASSWORD=true
+    - MYSQL_USER=docker
+    - MYSQL_PASSWORD=12345
+    - MYSQL_DATABASE=tradesman_testing
+    networks:
+    - tradesmannet_testing
+networks:
+  tradesmannet_testing:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: "192.168.101.0/28"
+        gateway: "192.168.101.1"

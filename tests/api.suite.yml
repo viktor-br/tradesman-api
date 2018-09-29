@@ -1,0 +1,15 @@
+actor: ApiTester
+modules:
+    enabled:
+        - REST:
+            url: http://tradesman-api-testing-nginx:8008/v1
+            depends: PhpBrowser
+            part: Json
+        - Db:
+            dsn: 'mysql:host=tradesman-api-testing-mysql;dbname=tradesman_testing'
+            user: 'docker'
+            password: '12345'
+            dump: 'tests/_data/dump.sql'
+            populate: true # run populator before all tests
+            cleanup: true # run populator before each test
+            populator: 'mysql -h $host -u $user --password=$password $dbname < $dump'
