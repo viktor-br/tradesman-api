@@ -2,7 +2,7 @@
 Simple API for tradesman jobs API.
 
 # Documentation
-Please see documentation online [https://app.swaggerhub.com/apis/viktor-br/tradesman-jobs-api/1.0#/]
+Please see documentation online [https://app.swaggerhub.com/apis/viktor-br/tradesman-jobs-api/1.0#/](https://app.swaggerhub.com/apis/viktor-br/tradesman-jobs-api/1.0#/)
 
 # Run application
 Requirements: docker and docker-compose
@@ -82,7 +82,7 @@ Hopefully you'll see:
 }
 ```
 
-To get access to API endpoint in browser ([http://www-docker.tradesman-api:8008/v1/postcode/10115]), you need to add next line to /etc/hosts:
+To get access to API endpoint in browser [http://www-docker.tradesman-api:8008/v1/postcode/10115](http://www-docker.tradesman-api:8008/v1/postcode/10115), you need to add next line to /etc/hosts:
 ```text
 127.0.0.1 www-docker.tradesman-api
 ```
