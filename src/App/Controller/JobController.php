@@ -166,7 +166,11 @@ class JobController extends FOSRestController
         $job->setPostcode($jobRequest->getPostcode());
         $job->setCity($jobRequest->getCity());
         $job->setDescription($jobRequest->getDescription());
-        $job->setFulfillmentDate($jobRequest->getFulfillmentDate()->setTime(0, 0, 0));
+        $job->setFulfillmentDate(
+            $jobRequest
+                ->getFulfillmentDate()
+                ->setTime(0, 0, 0)
+        );
         $job->setUpdatedAt(new \DateTime());
         $job->setService($service);
 
