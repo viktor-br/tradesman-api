@@ -20,9 +20,9 @@ class PostcodeValidatorTest extends \Codeception\Test\Unit
     }
 
     /**
-     * @dataProvider failureExamples
      * @param string $postcode
      * @param string $expectedMessage
+     * @dataProvider failureExamples
      */
     public function testGermanPostcodesFailure(string $postcode, string $expectedMessage): void
     {

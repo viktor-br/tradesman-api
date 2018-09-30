@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace App\Request;
 
 use JMS\Serializer\Annotation\Type;
-use JMS\Serializer\Annotation\SerializedName;
 
 class JobRequest
 {

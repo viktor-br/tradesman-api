@@ -10,8 +10,9 @@ use App\Repository\ServiceRepository;
 use App\Request\JobRequest;
 use App\Validator\JobRequestValidator;
 use App\Validator\PostcodeValidator;
+use Codeception\Test\Unit;
 
-class JobRequestValidatorTest extends \Codeception\Test\Unit
+class JobRequestValidatorTest extends Unit
 {
     /**
      * @param JobRequest $jobRequest
@@ -66,12 +67,11 @@ class JobRequestValidatorTest extends \Codeception\Test\Unit
         $jobRequestSuccess->setCity($city);
         $jobRequestSuccess->setServiceId($serviceId);
 
-        $jobRequestWrongTitle = clone $jobRequestSuccess;
-        $jobRequestWrongTitle->setTitle('abcd');
+        $jobRequestWithWrongTitle = clone $jobRequestSuccess;
+        $jobRequestWithWrongTitle->setTitle('abcd');
 
-        $jobRequestWrongFulfillmentDate = clone $jobRequestSuccess;
-        $jobRequestWrongFulfillmentDate->setFulfillmentDate((new \DateTime())->sub(new \DateInterval('P1D')));
-
+        $jobRequestWithWrongFulfillmentDate = clone $jobRequestSuccess;
+        $jobRequestWithWrongFulfillmentDate->setFulfillmentDate((new \DateTime())->sub(new \DateInterval('P1D')));
 
         $cityEntity = new City();
         $cityEntity->setName($city);
@@ -106,7 +106,7 @@ class JobRequestValidatorTest extends \Codeception\Test\Unit
                 [sprintf(JobRequestValidator::ERROR_MSG_SERVICE_NOT_FOUND, $jobRequestSuccess->getServiceId())]
             ],
             [
-                $jobRequestWrongTitle,
+                $jobRequestWithWrongTitle,
                 $cityEntity,
                 $serviceEntity,
                 [
@@ -118,7 +118,7 @@ class JobRequestValidatorTest extends \Codeception\Test\Unit
                 ]
             ],
             [
-                $jobRequestWrongFulfillmentDate,
+                $jobRequestWithWrongFulfillmentDate,
                 $cityEntity,
                 $serviceEntity,
                 [JobRequestValidator::ERROR_MSG_FULFILLMENT_DATE]

@@ -24,6 +24,10 @@ class PostcodeController extends FOSRestController
      */
     protected $postcodeValidator;
 
+    /**
+     * @param CityRepository $cityRepository
+     * @param PostcodeValidator $postcodeValidator
+     */
     public function __construct(CityRepository $cityRepository, PostcodeValidator $postcodeValidator)
     {
         $this->cityRepository = $cityRepository;

@@ -16,6 +16,9 @@ class ServiceController extends FOSRestController
      */
     protected $serviceRepository;
 
+    /**
+     * @param ServiceRepository $serviceRepository
+     */
     public function __construct(ServiceRepository $serviceRepository)
     {
         $this->serviceRepository = $serviceRepository;

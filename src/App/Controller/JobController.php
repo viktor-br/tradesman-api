@@ -34,6 +34,11 @@ class JobController extends FOSRestController
      */
     protected $jobRequestValidator;
 
+    /**
+     * @param JobRepository $jobRepository
+     * @param ServiceRepository $serviceRepository
+     * @param JobRequestValidator $jobRequestValidator
+     */
     public function __construct(
         JobRepository $jobRepository,
         ServiceRepository $serviceRepository,
@@ -71,6 +76,7 @@ class JobController extends FOSRestController
     public function putJob(JobRequest $jobRequest): View
     {
         $errors = $this->jobRequestValidator->validate($jobRequest);
+
         if (count($errors) > 0) {
             throw new \InvalidArgumentException(implode('; ', $errors));
         }
