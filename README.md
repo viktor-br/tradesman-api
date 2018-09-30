@@ -15,7 +15,7 @@ git clone git@github.com:viktor-br/tradesman-api.git
 and go inside the directory.
 
 ## Build docker images
-We need to build two docker image, not to rely on 3rd party images.
+We need to build two docker images, not to rely on 3rd party images.
 
 Build docker image for PHP cli with composer:
 ```bash
@@ -24,12 +24,11 @@ docker build \
     infrastructure/docker/php-with-composer
 ```
 
-Build docker image for application code:
+Build docker image for PHP fpm:
 ```bash
 docker build \
-    -f ./infrastructure/docker/application/Dockerfile \
     -t viktor-brusylovets/tradesman-api:v1.0 \
-    .
+    infrastructure/docker/application
 ```
 
 ## Dependencies installation
@@ -117,16 +116,21 @@ docker run \
 ```
 
 ## Docker artifacts clean up
-You can use next commands to remove containers, images and networks at the end.
+You can use next commands to remove created containers, images and networks at the end.
 ```bash
+docker stop tradesman-api-testing-nginx && docker rm tradesman-api-testing-nginx
+docker stop tradesman-api-testing-app && docker rm tradesman-api-testing-app
+docker stop tradesman-api-testing-mysql && docker rm tradesman-api-testing-mysql
+docker stop tradesman-api-dev-nginx && docker rm tradesman-api-dev-nginx
+docker stop tradesman-api-dev-app && docker rm tradesman-api-dev-app
+docker stop tradesman-api-dev-mysql && docker rm tradesman-api-dev-mysql
 docker image rm viktor-brusylovets/tradesman-api:v1.0
 docker image rm viktor-brusylovets/php-with-composer:v1.0
 docker network rm dev_tradesmannet_dev
 docker network rm testing_tradesmannet_testing
-docker rm tradesman-api-testing-nginx
-docker rm tradesman-api-testing-app
-docker rm tradesman-api-testing-mysql
-docker rm tradesman-api-dev-nginx
-docker rm tradesman-api-dev-app
-docker rm tradesman-api-dev-mysql
+
+```
+and remove added to /etc/hosts line (in case you did it):
+```text
+127.0.0.1 www-docker.tradesman-api
 ```
