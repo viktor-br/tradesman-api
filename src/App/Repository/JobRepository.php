@@ -65,6 +65,9 @@ class JobRepository extends ServiceEntityRepository
             );
         }
 
+        $criteria->setFirstResult($jobSearchRequest->getOffset());
+        $criteria->setMaxResults($jobSearchRequest->getLimit());
+
         return $this->matching($criteria)->getValues();
     }
 
